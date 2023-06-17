@@ -18,9 +18,9 @@
 #include "Tools/CommandLineParase.h"
 #include <cctype>
 
-#define LOCTEXT_NAMESPACE "UE4Launcher"
+#define LOCTEXT_NAMESPACE "UnrealEngineLauncher"
 
-IMPLEMENT_APPLICATION(UE4Launcher, "UE4Launcher");
+IMPLEMENT_APPLICATION(UnrealEngineLauncher, "UnrealEngineLauncher");
 namespace CommandHandler{
 	// Edit Mode
 	void CreateConfWindowByLaunchParams(const FString& Param);
@@ -52,7 +52,7 @@ namespace WindowManager
 int RealExecutionMain(const TCHAR* pCmdLine)
 {
 	// add .uejson file mapping for administrator user
-	EngineLaunchTools::UE4LauncherRegisterWriter();
+	EngineLaunchTools::UnrealEngineLauncherRegisterWriter();
 
 	FCommandLine::Set(pCmdLine);
 	// start up the main loop
@@ -161,9 +161,9 @@ namespace WindowManager
 				[
 					SAssignNew(VersionUpdaterWidget,SVersionUpdaterWidget)
 					.ToolName(FText::FromString(TOOL_NAME))
-					.DeveloperName(FText::FromString(TEXT("lipengzha")))
-					.DeveloperWebsite(FText::FromString(TEXT("https://imzlp.com")))
-					.UpdateWebsite(FText::FromString(TEXT("https://imzlp.com/posts/11750/")))
+					.DeveloperName(FText::FromString(TEXT("bathurlu")))
+					.DeveloperWebsite(FText::FromString(TEXT("https://bathur.cn")))
+					.UpdateWebsite(FText::FromString(TEXT("https://bathur.cn")))
 					.CurrentVersion(CURRENT_VERSION_ID)
 				]
 				+SVerticalBox::Slot()

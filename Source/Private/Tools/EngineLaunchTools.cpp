@@ -142,7 +142,7 @@ void EngineLaunchTools::RegisterValueWriter(HKEY hKey, DWORD dwType,const FStrin
 		RegCloseKey(hRootKey);
 	}
 }
-void EngineLaunchTools::UE4LauncherRegisterWriter()
+void EngineLaunchTools::UnrealEngineLauncherRegisterWriter()
 {
 
 	struct FValueRegister
@@ -158,16 +158,16 @@ void EngineLaunchTools::UE4LauncherRegisterWriter()
 	};
 	FString ExecutableProgramPath = TEXT("\"")+EngineLaunchTools::GetCurrentProgramFullName()+ TEXT("\"");
 	TArray<FValueRegister> WaitWrite{
-		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT(".uejson"),TEXT(""),TEXT("UE4Launcher.ProjectFile"),true },
-		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UE4Launcher.ProjectFile\\DefaultIcon"),TEXT(""),ExecutableProgramPath+TEXT(",1"),true },
-		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UE4Launcher.ProjectFile\\shell\\edit"),TEXT(""),TEXT("Edit Config") ,true},
-		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UE4Launcher.ProjectFile\\shell\\edit"),TEXT("Icon"),ExecutableProgramPath + TEXT(",1")},
-		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UE4Launcher.ProjectFile\\shell\\edit\\command"),TEXT(""),ExecutableProgramPath + TEXT(" -e \"%1\"") ,true},
-		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UE4Launcher.ProjectFile\\shell\\run"),TEXT(""),TEXT("Launch Config") ,true},
-		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UE4Launcher.ProjectFile\\shell\\run"),TEXT("Icon"),ExecutableProgramPath},
-		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UE4Launcher.ProjectFile\\shell\\run\\command"),TEXT(""),ExecutableProgramPath + TEXT(" -c \"%1\""), true},
+		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT(".uejson"),TEXT(""),TEXT("UnrealEngineLauncher.ProjectFile"),true },
+		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UnrealEngineLauncher.ProjectFile\\DefaultIcon"),TEXT(""),ExecutableProgramPath+TEXT(",1"),true },
+		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UnrealEngineLauncher.ProjectFile\\shell\\edit"),TEXT(""),TEXT("Edit Config") ,true},
+		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UnrealEngineLauncher.ProjectFile\\shell\\edit"),TEXT("Icon"),ExecutableProgramPath + TEXT(",1")},
+		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UnrealEngineLauncher.ProjectFile\\shell\\edit\\command"),TEXT(""),ExecutableProgramPath + TEXT(" -e \"%1\"") ,true},
+		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UnrealEngineLauncher.ProjectFile\\shell\\run"),TEXT(""),TEXT("Launch Config") ,true},
+		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UnrealEngineLauncher.ProjectFile\\shell\\run"),TEXT("Icon"),ExecutableProgramPath},
+		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("UnrealEngineLauncher.ProjectFile\\shell\\run\\command"),TEXT(""),ExecutableProgramPath + TEXT(" -c \"%1\""), true},
 		// Unreal.ProjectFile
-		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("Unreal.ProjectFile\\shell\\genconf"),TEXT(""),TEXT("Genreate UE4Launcher Config") ,true},
+		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("Unreal.ProjectFile\\shell\\genconf"),TEXT(""),TEXT("Genreate UnrealEngineLauncher Config") ,true},
 		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("Unreal.ProjectFile\\shell\\genconf"),TEXT("Icon"),ExecutableProgramPath},
 		FValueRegister{ HKEY_CLASSES_ROOT ,REG_SZ,TEXT("Unreal.ProjectFile\\shell\\genconf\\command"),TEXT(""),ExecutableProgramPath + TEXT(" -g \"%1\""), true}
 	};

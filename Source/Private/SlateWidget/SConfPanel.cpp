@@ -413,7 +413,7 @@ FReply SConfPanel::BtnClickEventOpenProjectFile()
 			LOCTEXT("OpenUEProjectDialogTitle", "Open .uproject").ToString(),
 			FString(TEXT("")),
 			TEXT(""),
-			TEXT("UE4 Project (*.uproject)|*.uproject"),
+			TEXT("UE Project (*.uproject)|*.uproject"),
 			EFileDialogFlags::None,
 			OpenFilenames
 		);
@@ -516,10 +516,10 @@ FReply SConfPanel::BtnClickEventLoadConfig()
 		TArray<FString> OpenFilenames;
 		const bool bOpened = DesktopPlatform->OpenFileDialog(
 			(ParentWindow.IsValid()) ? ParentWindow->GetNativeWindow()->GetOSWindowHandle() : nullptr,
-			LOCTEXT("OpenUE4LaunchConfig", "Open .uejson").ToString(),
+			LOCTEXT("OpenUELaunchConfig", "Open .uejson").ToString(),
 			FString(TEXT("")),
 			TEXT(""),
-			TEXT("UE4Launcher json (*.uejson)|*.uejson"),
+			TEXT("UnrealEngineLauncher json (*.uejson)|*.uejson"),
 			EFileDialogFlags::None,
 			OpenFilenames
 		);
@@ -562,10 +562,10 @@ FReply SConfPanel::BtnClickEventSaveConfig()
 			TArray<FString> SaveFilenames;
 			const bool bOpened = DesktopPlatform->SaveFileDialog(
 				(ParentWindow.IsValid()) ? ParentWindow->GetNativeWindow()->GetOSWindowHandle() : nullptr,
-				LOCTEXT("SvedUE4LaunchConfig", "Save .uejson").ToString(),
+				LOCTEXT("SvedUELaunchConfig", "Save .uejson").ToString(),
 				FString(TEXT("")),
 				TEXT(""),
-				TEXT("UE4Launcher json (*.uejson)|*.uejson"),
+				TEXT("UnrealEngineLauncher json (*.uejson)|*.uejson"),
 				EFileDialogFlags::None,
 				SaveFilenames
 			);

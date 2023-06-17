@@ -199,6 +199,11 @@ void SVersionUpdaterWidget::OnRequestComplete(FHttpRequestPtr RequestPtr, FHttpR
 
 void SVersionUpdaterWidget::RequestVersion(const FString& URL)
 {
+	if (URL.IsEmpty())
+	{
+		return;
+	}
+
 	if(HttpHeadRequest.IsValid())
 	{
 		HttpHeadRequest->CancelRequest();

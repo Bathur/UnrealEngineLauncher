@@ -6,8 +6,8 @@
 #include "../../../Runtime/Launch/Resources/Windows/resource.h"
 #include "../../../Runtime/Launch/Resources/Version.h"
 
-#define IDICON_UE4Launcher 2000
-#define IDICON_UE4Config 2001
+#define IDICON_UnrealEngineLauncher 2000
+#define IDICON_UnrealEngineConfig 2001
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -30,13 +30,13 @@ BEGIN
 	BEGIN
 		BLOCK "040904b0"
 		BEGIN
-			VALUE "CompanyName", "imzlp.me"
+			VALUE "CompanyName", "bathur.cn"
 			VALUE "LegalCopyright", EPIC_COPYRIGHT_STRING
-			VALUE "ProductName", "UE4 Launcher"
+			VALUE "ProductName", "Unreal Engine Launcher"
 			VALUE "ProductVersion", ENGINE_VERSION_STRING
-			VALUE "FileDescription", "UE4 Launcher"
+			VALUE "FileDescription", "Unreal Engine Launcher"
 			VALUE "InternalName", EPIC_PRODUCT_IDENTIFIER
-			VALUE "OriginalFilename", "UE4Launcher.exe"
+			VALUE "OriginalFilename", "UnrealEngineLauncher.exe"
 			VALUE "ShellIntegrationVersion", "2"
 		END
 	END
@@ -75,5 +75,5 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDICON_UE4Launcher			ICON                    "Icon.ico"
-IDICON_UE4Config		ICON                    "Icon_config.ico"
+IDICON_UnrealEngineLauncher			ICON                    "Icon.ico"
+IDICON_UnrealEngineConfig		ICON                    "Icon_config.ico"

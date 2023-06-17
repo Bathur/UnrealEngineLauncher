@@ -36,7 +36,7 @@ public:
 	static TMap<FString, FString> GetAllRegistedEngineMap();
 	static TArray<FString> GetAllRegistedEngineList(const TMap<FString, FString>& pEngineMap);
 	static void RegisterValueWriter(HKEY hKey, DWORD dwType, const FString& lpSubKey, const FString& lpValueName, const FString& lpData, bool SetAsDefaultValue);
-	static void UE4LauncherRegisterWriter();
+	static void UnrealEngineLauncherRegisterWriter();
 	static FString GetEnginePathFromIdentifier(const FString& EngineIdentifier);
 	// Tool Info
 	static TArray<FToolInfo> GetToolsInfoList();

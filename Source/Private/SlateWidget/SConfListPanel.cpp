@@ -16,6 +16,7 @@
 #include "Paths.h"
 #include "IDesktopPlatform.h"
 #include "DesktopPlatformModule.h"
+#include "Runtime/Launch/Resources/Version.h"
 // project files
 #include "Widgets/SCanvas.h"
 #include "Tools/SerializationTools.h"
@@ -156,14 +157,6 @@ void SConfigListPanel::Construct(const FArguments& InArgs)
 				[
 					SNew(SOverlay)
 				]
-				//+SHorizontalBox::Slot()
-				//.AutoWidth()
-				//.HAlign(HAlign_Center)
-				//[
-				//	SNew(SHyperlink)
-				//	.Text(LOCTEXT("LauncherVersion", *UKismetStringLibrary::Conv_IntToString(CURRENT_VERSION_ID)))
-				//	.OnNavigate(this, &SConfigListPanel::HyLinkClickEventOpenVersionWebsite)
-				//]
 			]
 			+SVerticalBox::Slot()
 			.AutoHeight()
@@ -197,12 +190,23 @@ void SConfigListPanel::AddConfig(const FLaunchConf& Conf)
 {
 	if(ConfigListWidget.IsValid())
 	{
+
+#if ENGINE_MAJOR_VERSION == 4
 		TSharedPtr<SWidget> Widget = ConfigListWidget->AddSlot()
 		.Padding(1.5)
 		.AutoHeight()
 		[
 			SNew(SConfigCard,Conf)
 		].GetWidget();
+#elif ENGINE_MAJOR_VERSION == 5
+		TSharedPtr<SWidget> Widget = ConfigListWidget->AddSlot()
+		.Padding(1.5)
+		.AutoHeight()
+		[
+			SNew(SConfigCard, Conf)
+		].GetAttachedWidget();
+#endif
+
 		SConfigCard* CardIns = (SConfigCard*)(Widget.Get());
 		CardIns->OnConfigCardSelected.BindRaw(this,&SConfigListPanel::OnConfigSelected);
 		ConfigCardsWidget.Add(Widget);

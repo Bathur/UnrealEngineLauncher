@@ -12,4 +12,7 @@ if not "%current_dir_nametmp%"=="%current_dir_name%" goto loop
 echo Current Directory Name Is [%current_dir_name%]
 echo.
 
-"%UE_Engine_Dir%\Intermediate\ProjectFiles\%current_dir_name%.vcxproj"
+echo Try To Clean Up Old Project Files
+del %UE_Engine_Dir%\Intermediate\ProjectFiles\%current_dir_name%.*
+echo Old Project Files Is Cleaed
+echo.

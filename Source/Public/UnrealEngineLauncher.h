@@ -4,7 +4,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UE4LauncherLog.h"
+#include "UnrealEngineLauncherLog.h"
 
 #include "GenericPlatform/GenericApplication.h"
 #include "RequiredProgramMainCPPInclude.h"

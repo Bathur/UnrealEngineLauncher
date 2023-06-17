@@ -5,5 +5,5 @@
 
 #include "CoreMinimal.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(LogUE4Launcher, Verbose, All);
+DECLARE_LOG_CATEGORY_EXTERN(LogUnrealEngineLauncher, Verbose, All);
 
