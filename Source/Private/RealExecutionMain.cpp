@@ -1,4 +1,3 @@
-
 #include "RealExecutionMain.h"
 #include "LaunchEngineLoop.h"
 #include "StandaloneRenderer.h"
@@ -10,7 +9,7 @@
 #include "IWebBrowserPopupFeatures.h"
 #include <iostream>
 
-// project files
+// Project Files
 #include "SlateWidget/SConfPanel.h"
 #include "Data/FLaunchConf.h"
 #include "Tools/EngineLaunchTools.h"
@@ -21,14 +20,15 @@
 #define LOCTEXT_NAMESPACE "UnrealEngineLauncher"
 
 IMPLEMENT_APPLICATION(UnrealEngineLauncher, "UnrealEngineLauncher");
+
 namespace CommandHandler{
+
 	// Edit Mode
 	void CreateConfWindowByLaunchParams(const FString& Param);
-	// Launch Config don't create Config Panel
+	// Launch Config Don't Create Config Panel
 	void LaunchConfInstanceByCmdLine(const FString& Param);
-	// from .uproject create .uejson
+	// From .uproject Create .uejson
 	void GenerateLaunchConfFileByUproject(const FString& Param);
-
 
 	void HandleMainWindowClosed(const TSharedRef<SWindow>& pMainWindow);
 
@@ -36,7 +36,6 @@ namespace CommandHandler{
 	static TSharedPtr<SWindow> MainWindow;
 	static bool HasWindow=false;
 };
-
 
 namespace WindowManager
 {
@@ -47,24 +46,22 @@ namespace WindowManager
 	static TArray<TSharedPtr<SWindow>> WindowsList;
 };
 
-
-
 int RealExecutionMain(const TCHAR* pCmdLine)
 {
-	// add .uejson file mapping for administrator user
+	// Add .uejson File Mapping For Administrator User
 	EngineLaunchTools::UnrealEngineLauncherRegisterWriter();
 
 	FCommandLine::Set(pCmdLine);
-	// start up the main loop
+	// Start Up The Main Loop
 	GEngineLoop.PreInit(pCmdLine);
-	// Make sure all UObject classes are registered and default properties have been initialized
+	// Make Dure Sll UObject Classes Are Registered And Default Properties Have Been Initialized
 	ProcessNewlyLoadedUObjects();
-	// Tell the module manager it may now process newly-loaded UObjects when new C++ modules are loaded
+	// Tell The Module Manager It May Now Process Newly-loaded UObjects When New C++ Modules Are Loaded
 	FModuleManager::Get().StartProcessingNewlyLoadedObjects();
-	// crank up a normal Slate application using the platform's standalone renderer
+	// Crank Up A Normal Slate Application Using The Platform's Standalone Renderer
 	FSlateApplication::InitializeAsStandaloneApplication(GetStandardStandaloneRenderer());
-	// set the application name
-	FGlobalTabmanager::Get()->SetApplicationTitle(LOCTEXT("AppTitle", "UE Launcher"));
+	// Set The Application Name
+	FGlobalTabmanager::Get()->SetApplicationTitle(LOCTEXT("AppTitle", "Unreal Engine Launcher"));
 	FModuleManager::LoadModuleChecked<ISlateReflectorModule>("SlateReflector").RegisterTabSpawner(FWorkspaceItem::NewGroup(LOCTEXT("DeveloperMenu", "Developer")));
 
 
@@ -101,7 +98,7 @@ int RealExecutionMain(const TCHAR* pCmdLine)
 
 	if (CommandHandler::HasWindow)
 	{
-		// main loop
+		// Main Loop
 		while (!IsEngineExitRequested())
 		{
 			FTaskGraphInterface::Get().ProcessThreadUntilIdle(ENamedThreads::GameThread);
@@ -119,14 +116,15 @@ int RealExecutionMain(const TCHAR* pCmdLine)
 	return 0;
 }
 
-
 #include "SlateWidget/SConfigListPanel.h"
 #include "SlateWidget/SVersionUpdater/SVersionUpdaterWidget.h"
+
 namespace WindowManager
 {
 	static TSharedPtr < SConfPanel > LauncherPanel;
 	static TSharedPtr < SConfigListPanel > LauncherConfListPanel;
 	static TSharedPtr < SVersionUpdaterWidget > VersionUpdaterWidget;
+
 	void OnConfigSelected(FLaunchConf Config)
 	{
 		if(LauncherPanel.IsValid())
@@ -134,6 +132,7 @@ namespace WindowManager
 			LauncherPanel->UpdateAll(Config);
 		}
 	}
+
 	void OnAddToGlobal(FLaunchConf Config)
 	{
 		if(LauncherConfListPanel.IsValid())
@@ -141,16 +140,15 @@ namespace WindowManager
 			LauncherConfListPanel->AddConfig(Config);
 		}
 	}
+
 	TSharedPtr<SWindow> CreateConfWindow(const FLaunchConf& Conf, const FString& ConfFile)
 	{
 		TSharedPtr<SWindow> ConfWindow = SNew(SWindow)
-			.Title(LOCTEXT("MainWindow_Title", "UE Launcher"))
+			.Title(LOCTEXT("MainWindow_Title", "Unreal Engine Launcher"))
 			.ScreenPosition(FVector2D(800, 1200))
 			.ClientSize(FVector2D(1200, 800))
 			.SupportsMaximize(false)
 			.AutoCenter(EAutoCenter::PrimaryWorkArea)
-			// .MaxHeight(1000)
-			// .MaxWidth(650)
 			.MinHeight(800)
 			.MinWidth(1200)
 			.IsTopmostWindow(false)
@@ -184,20 +182,19 @@ namespace WindowManager
 						SAssignNew(LauncherPanel, SConfPanel)
 					]
 				]
-
-				//.OnOpenedFileEvent.BindStatic(&WindowManager::OnOpenFileChangeWindowTitle)
 			];
+
 		LauncherConfListPanel->OnConfigFileSelected.BindStatic(&WindowManager::OnConfigSelected);
 		LauncherPanel->OnAddToGlobal.BindStatic(&WindowManager::OnAddToGlobal);
 		WindowManager::WindowsList.Add(ConfWindow);
-		// show the window
+		// Show The Window
 		FSlateApplication::Get().AddWindow(ConfWindow.ToSharedRef());
 		
-		// Bind Opened file Event
+		// Bind Opened File Event
 		LauncherPanel->OnOpenedFileEvent.BindStatic(&WindowManager::OnOpenFileChangeWindowTitle);
 		// Set Current Opened Conf File
 		LauncherPanel->SetOpenedFile(ConfFile);
-		// use config
+		// Use Config
 		LauncherPanel->UpdateAll(Conf);
 
 		return ConfWindow;
@@ -208,11 +205,11 @@ namespace WindowManager
 		if (!File.IsEmpty() && WindowManager::WindowsList.Num())
 		{
 			FString ConfFileName = EngineLaunchTools::GetFileNameByFullDir(File);
-			WindowManager::WindowsList[0]->SetTitle(FText::FromString(ConfFileName + TEXT(" | UE Launcher")));
+			WindowManager::WindowsList[0]->SetTitle(FText::FromString(ConfFileName + TEXT(" | Unreal Engine Launcher")));
 		}
 		else
 		{
-			WindowManager::WindowsList[0]->SetTitle(FText::FromString(TEXT("UE Launcher")));
+			WindowManager::WindowsList[0]->SetTitle(FText::FromString(TEXT("Unreal Engine Launcher")));
 		}
 	}
 };
@@ -229,7 +226,7 @@ namespace CommandHandler
 		{
 			Conf = SerializationTools::DeSerializationConf(jsonValue);
 		}
-		// the config file is existed in disk?
+		// The Config File Is Existed In Disk?
 		if (!FPaths::FileExists(jsonFile))
 			jsonFile.Empty();
 		CommandHandler::MainWindow = WindowManager::CreateConfWindow(Conf,jsonFile);
@@ -239,6 +236,7 @@ namespace CommandHandler
 			CommandHandler::MainWindow->SetOnWindowClosed(FOnWindowClosed::CreateStatic(&CommandHandler::HandleMainWindowClosed));
 		}
 	}
+
 	void LaunchConfInstanceByCmdLine(const FString& Param)
 	{
 		FLaunchConf Conf;
@@ -251,6 +249,7 @@ namespace CommandHandler
 		}
 		EngineLaunchTools::EngineLauncher(Conf);
 	}
+
 	void GenerateLaunchConfFileByUproject(const FString& Param)
 	{
 		FLaunchConf Conf;
@@ -276,7 +275,7 @@ namespace CommandHandler
 
 	void HandleMainWindowClosed(const TSharedRef<SWindow>& pMainWindow)
 	{
-		// close the window notify user save config.
+		// Close The Window Notify User Save Config.
 	}
 
 	bool CmdKeyHasMatched(const TArray<FString>& pTokens, const TArray<FString>& pKeys)
@@ -293,4 +292,5 @@ namespace CommandHandler
 		return bIsMatched;
 	}
 };
+
 #undef LOCTEXT_NAMESPACE
