@@ -271,7 +271,7 @@ FString EngineLaunchTools::GetToolBinPath(const FLaunchConf& conf)
 	FToolInfo ToolInfo = EngineLaunchTools::GetToolInfo(conf.Tool);
 	if (ToolInfo.ToolName.Equals(TEXT("Editor"),ESearchCase::IgnoreCase) || ToolInfo.ToolName.Equals(TEXT("Editor-cmd"), ESearchCase::IgnoreCase))
 	{
-		result = FPaths::Combine(conf.Engine, ToolInfo.BinPath, TEXT("UE4")+ToolInfo.ToolName + PLATFROM_EXECUTABLE_FORMAT);
+		result = FPaths::Combine(conf.Engine, ToolInfo.BinPath, TEXT("UE4") + ToolInfo.ToolName + PLATFROM_EXECUTABLE_FORMAT);
 		if (!FPaths::FileExists(result))
 		{
 			result = FPaths::Combine(conf.Engine, ToolInfo.BinPath, TEXT("Unreal") + ToolInfo.ToolName + PLATFROM_EXECUTABLE_FORMAT);

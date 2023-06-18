@@ -255,7 +255,7 @@ namespace CommandHandler
 		FLaunchConf Conf;
 		FString EnginePath=EngineLaunchTools::GetUEProjectEnginePath(Param);
 		Conf.Engine = EnginePath;
-		Conf.Tool = TEXT("UE4Editor");
+		Conf.Tool = TEXT("Editor");
 		Conf.Project = Param;
 
 		FString ProjectDir = EngineLaunchTools::GetProjectDir(Param);

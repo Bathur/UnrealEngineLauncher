@@ -30,7 +30,7 @@ void SConfigCard::Construct(const FArguments& InArgs,const FLaunchConf& Conf)
 	FString Args;
 	for(const auto& Arg:Config.Params){ Args += TEXT(" ") + Arg; }
 	
-	FString ConfigText = FString::Printf(TEXT(" Engine: %s\n Tool: %s"),*Config.Engine,*Config.Tool);
+	FString ConfigText = FString::Printf(TEXT(" Engine: %s\n Tool: %s"), *Config.Engine, *Config.Tool);
 	ConfigText += Config.Project.IsEmpty() ? Config.Project: FString::Printf(TEXT("\n Project: %s"),*Conf.Project);
 	ConfigText += Args.IsEmpty() ? Args: FString::Printf(TEXT("\n Args: %s"),*Args);
 	ChildSlot

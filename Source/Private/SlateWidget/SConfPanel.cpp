@@ -462,13 +462,31 @@ FReply SConfPanel::BtnClickEventGenerateProjectSln()
 
 FReply SConfPanel::BtnClickEventOpenVS()
 {
-	FString ue4sln = GetSelectedEnginePath() + TEXT("//UE4.sln");
+	FString uesln = "";
+	
+	if (FPaths::FileExists(GetSelectedEnginePath() + TEXT("//UE4.sln")))
 	{
-		ue4sln.InsertAt(0, TEXT("\""));
-		ue4sln.Append(TEXT("\""));
+		uesln = GetSelectedEnginePath() + TEXT("//UE4.sln");
 	}
-	FString FinalCmdParams = TEXT("/c ") + ue4sln;
+	
+	if (FPaths::FileExists(GetSelectedEnginePath() + TEXT("//UE5.sln")))
+	{
+		uesln = GetSelectedEnginePath() + TEXT("//UE5.sln");
+	}
+
+	if (uesln.IsEmpty())
+	{
+		return FReply::Handled();
+	}
+	else
+	{
+		uesln.InsertAt(0, TEXT("\""));
+		uesln.Append(TEXT("\""));
+	}
+	
+	FString FinalCmdParams = TEXT("/c ") + uesln;
 	FPlatformProcess::CreateProc(TEXT("cmd.exe"), *FinalCmdParams, true, false, false, NULL, NULL, NULL, NULL, NULL);
+
 	return FReply::Handled();
 }
 
