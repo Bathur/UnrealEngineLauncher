@@ -187,7 +187,7 @@ void SConfPanel::Construct(const FArguments& InArgs)
 										[
 											SNew(SEditableTextBox)
 											.Text(this, &SConfPanel::GetProjectFileText)
-											.HintText(LOCTEXT("SEditableTextBoxHint", "Please Select You Want Launch .uproject file."))
+											.HintText(LOCTEXT("SEditableTextBoxHint", "Please Select You Want Launch .uproject File."))
 											.OnTextChanged(this, &SConfPanel::OnProjectFileTextBoxChanged)
 
 										]
@@ -343,7 +343,7 @@ void SConfPanel::Construct(const FArguments& InArgs)
 
 void SConfPanel::HyLinkClickEventOpenDeveloperWebsite()
 {
-	FPlatformProcess::LaunchURL(TEXT("https://bathur.cn"), NULL, NULL);
+	FPlatformProcess::LaunchURL(TEXT("https://imzlp.com"), NULL, NULL);
 }
 
 EVisibility SConfPanel::BtnGenerateSlnVisibility()const
