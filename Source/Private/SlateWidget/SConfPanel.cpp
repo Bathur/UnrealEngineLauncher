@@ -174,7 +174,7 @@ void SConfPanel::Construct(const FArguments& InArgs)
 							+ SVerticalBox::Slot()
 								[
 									SNew(STextBlock)
-									.Text(LOCTEXT("UE Project File", "Select your .uproject file:"))
+									.Text(LOCTEXT("UE Project File", "Select Your .uproject File:"))
 								]
 							+ SVerticalBox::Slot()
 								.AutoHeight()
@@ -187,7 +187,7 @@ void SConfPanel::Construct(const FArguments& InArgs)
 										[
 											SNew(SEditableTextBox)
 											.Text(this, &SConfPanel::GetProjectFileText)
-											.HintText(LOCTEXT("SEditableTextBoxHint", "Please select you want launch .uproject file."))
+											.HintText(LOCTEXT("SEditableTextBoxHint", "Please Select You Want Launch .uproject file."))
 											.OnTextChanged(this, &SConfPanel::OnProjectFileTextBoxChanged)
 
 										]
@@ -673,7 +673,7 @@ TArray<FString> SConfPanel::GetAllLaunchParams()const
 TSharedRef<SEditableBoxWrapper> SConfPanel::CreateEditableTextBox(const FString& TextContent)
 {
 	TSharedRef<SEditableBoxWrapper> CreatedWidget = SNew(SEditableBoxWrapper)
-		.EditableHintText(LOCTEXT("LaunchParam_0", "Please input Launch paramater."))
+		.EditableHintText(LOCTEXT("LaunchParam_0", "Please Input Launch Paramater."))
 		.EditableText(FText::FromString(TextContent))
 		.BtnOpenText(FText::FromString(TEXT("O")))
 		.BtnClearText(FText::FromString(TEXT("C")))
