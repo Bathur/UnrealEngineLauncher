@@ -1,9 +1,8 @@
 #include "Tools/SlateWidgetTools.h"
 #include "Tools/HackPrivateMember.hpp"
 
-// engine files
+// Engine Files
 #include "Widgets/Layout/SScrollBox.h"
-
 
 DECL_HACK_PRIVATE_DATA(SScrollBox, TSharedPtr<SScrollPanel>, ScrollPanel)
 

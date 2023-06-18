@@ -5,6 +5,9 @@ class SScrollBox;
 
 class SlateWidgetTools
 {
+
 public:
+
 	static FChildren* GetScrollBoxChildren(SScrollBox* ScrollboxWidget);
+
 };

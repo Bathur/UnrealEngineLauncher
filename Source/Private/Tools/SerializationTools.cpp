@@ -1,5 +1,6 @@
 #include "Tools/SerializationTools.h"
 #include "Tools/EngineLaunchTools.h"
+
 TSharedPtr<FJsonObject> SerializationTools::SerializationConfAsJsonObj(const FLaunchConf& SaveConfig)
 {
 	TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject);

@@ -1,8 +1,9 @@
 #include "Tools/CommandLineParase.h"
+#include <cctype>
 
 TMap<FString,FString> CommandLineParase::GetCommandLineParamsMap(const FString& CommandLine)
 {
-	TMap<FString,FString> resault;
+	TMap<FString,FString> result;
 	TArray<FString> ParamsSwitchs,ParamsTokens;
 	FCommandLine::Parse(*CommandLine, ParamsTokens, ParamsSwitchs);
 
@@ -19,13 +20,13 @@ TMap<FString,FString> CommandLineParase::GetCommandLineParamsMap(const FString& 
 			}
 			if (!ItemToken.IsEmpty())
 			{
-				// remove all end point space
+				// Remove All End Point Space
 				while (std::isspace(ItemToken[ItemToken.Len() - 1]))
 					ItemToken.RemoveAt(ItemToken.Len() - 1);
 			}
-			resault.Add(SwitchItem,ItemToken);
+			result.Add(SwitchItem,ItemToken);
 		}
 	}
 
-	return resault;
+	return result;
 }

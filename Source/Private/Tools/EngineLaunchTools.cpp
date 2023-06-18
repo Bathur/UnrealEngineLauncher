@@ -73,40 +73,34 @@ bool EngineLaunchTools::EngineLauncher(const FLaunchConf& conf)
 	return true;
 }
 
-//FString EngineLaunchTools::GetEngineBinPath(const FLaunchConf& conf)
-//{
-//#define EXECUTABLE_FORMAT TEXT(".exe")
-//	FString resault(FPaths::Combine(*conf.Engine, TEXT("Engine/Binaries/"),*conf.Platfrom,*(conf.Tool + EXECUTABLE_FORMAT)));
-//#undef EXECUTABLE_FORMAT
-//	return resault;
-//}
 FString EngineLaunchTools::CombineLaunchParams(const FLaunchConf& conf)
 {
-	FString resault(TEXT(""));
+	FString result(TEXT(""));
 	if (!conf.ToolPreArgs.IsEmpty())
-		resault.Append(conf.ToolPreArgs);
-	resault.Append(TEXT("\"")).Append(conf.Project).Append(TEXT("\" "));
+		result.Append(conf.ToolPreArgs);
+	result.Append(TEXT("\"")).Append(conf.Project).Append(TEXT("\" "));
 	for(const auto& ParamItem:conf.Params)
 	{
 		if (!ParamItem.IsEmpty())
 		{
-			resault.Append(" ");
-			resault.Append(ParamItem);
+			result.Append(" ");
+			result.Append(ParamItem);
 		}
 	}
-	return resault;
+	return result;
 }
 
 TMap<FString, FString> EngineLaunchTools::GetAllRegistedEngineMap()
 {
-	TMap<FString, FString> resault;
-	FDesktopPlatformModule::Get()->EnumerateEngineInstallations(resault);
+	TMap<FString, FString> result;
+	FDesktopPlatformModule::Get()->EnumerateEngineInstallations(result);
 
-	return resault;
+	return result;
 }
+
 TArray<FString> EngineLaunchTools::GetAllRegistedEngineList(const TMap<FString, FString>& pEngineMap)
 {
-	TArray<FString> resault;
+	TArray<FString> result;
 	TArray<FString> EngineAllKey;
 	pEngineMap.GetKeys(EngineAllKey);
 
@@ -114,10 +108,10 @@ TArray<FString> EngineLaunchTools::GetAllRegistedEngineList(const TMap<FString, 
 	{
 		if (pEngineMap.Find(Key))
 		{
-			resault.Add(*pEngineMap.Find(Key));
+			result.Add(*pEngineMap.Find(Key));
 		}
 	}
-	return resault;
+	return result;
 }
 
 FString EngineLaunchTools::GetEnginePathFromIdentifier(const FString& EngineIdentifier)
@@ -142,6 +136,7 @@ void EngineLaunchTools::RegisterValueWriter(HKEY hKey, DWORD dwType,const FStrin
 		RegCloseKey(hRootKey);
 	}
 }
+
 void EngineLaunchTools::UnrealEngineLauncherRegisterWriter()
 {
 
@@ -213,13 +208,13 @@ FString EngineLaunchTools::GetCurrentProgramDir()
 	}
 	return Path;
 }
+
 TArray<FToolInfo> EngineLaunchTools::GetToolsInfoList()
 {
 	TArray<FToolInfo> Result;
 	
 	FString LaunchToolsConfPath = FPaths::Combine(EngineLaunchTools::GetCurrentProgramDir(), TEXT("LaunchTools.json"));
 
-	// printf("%s", TCHAR_TO_ANSI(*LaunchToolsConfPath));
 	if (FPaths::FileExists(LaunchToolsConfPath))
 	{
 		FString ConfigContent;
@@ -249,12 +244,12 @@ TArray<FToolInfo> EngineLaunchTools::GetToolsInfoList()
 
 TArray<FString> EngineLaunchTools::GetToolList()
 {
-	TArray<FString> resault;
+	TArray<FString> result;
 	for (const auto& ToolItem : EngineLaunchTools::GetToolsInfoList())
 	{
-		resault.Add(ToolItem.ToolName);
+		result.Add(ToolItem.ToolName);
 	}
-	return resault;
+	return result;
 }
 
 FToolInfo EngineLaunchTools::GetToolInfo(const FString& ToolName)
@@ -272,25 +267,24 @@ FToolInfo EngineLaunchTools::GetToolInfo(const FString& ToolName)
 FString EngineLaunchTools::GetToolBinPath(const FLaunchConf& conf)
 {
 #define PLATFROM_EXECUTABLE_FORMAT TEXT(".exe")
-	FString resault(TEXT(""));
+	FString result(TEXT(""));
 	FToolInfo ToolInfo = EngineLaunchTools::GetToolInfo(conf.Tool);
 	if (ToolInfo.ToolName.Equals(TEXT("Editor"),ESearchCase::IgnoreCase) || ToolInfo.ToolName.Equals(TEXT("Editor-cmd"), ESearchCase::IgnoreCase))
 	{
-		resault = FPaths::Combine(conf.Engine, ToolInfo.BinPath, TEXT("UE4")+ToolInfo.ToolName + PLATFROM_EXECUTABLE_FORMAT);
-		if (!FPaths::FileExists(resault))
+		result = FPaths::Combine(conf.Engine, ToolInfo.BinPath, TEXT("UE4")+ToolInfo.ToolName + PLATFROM_EXECUTABLE_FORMAT);
+		if (!FPaths::FileExists(result))
 		{
-			resault = FPaths::Combine(conf.Engine, ToolInfo.BinPath, TEXT("Unreal") + ToolInfo.ToolName + PLATFROM_EXECUTABLE_FORMAT);
+			result = FPaths::Combine(conf.Engine, ToolInfo.BinPath, TEXT("Unreal") + ToolInfo.ToolName + PLATFROM_EXECUTABLE_FORMAT);
 		}
 	}
 	else
 	{
-		resault = FPaths::Combine(conf.Engine, ToolInfo.BinPath, ToolInfo.ToolName + PLATFROM_EXECUTABLE_FORMAT);
+		result = FPaths::Combine(conf.Engine, ToolInfo.BinPath, ToolInfo.ToolName + PLATFROM_EXECUTABLE_FORMAT);
 	}
 	
 #undef PLATFROM_EXECUTABLE_FORMAT
-	return resault;
+	return result;
 }
-
 
 FString EngineLaunchTools::GetUEProjectEnginePath(const FString& upeojctFile)
 {
@@ -320,10 +314,9 @@ FString EngineLaunchTools::GetProjectDir(const FString& Project)
 	return ProjectPath;
 }
 
-
 FString EngineLaunchTools::GetFileNameByFullDir(const FString& FullDir)
 {
-	FString resault;
+	FString result;
 	TArray<FString> OutArray;
 	{
 		FullDir.ParseIntoArray(OutArray, TEXT("/"));
@@ -332,10 +325,10 @@ FString EngineLaunchTools::GetFileNameByFullDir(const FString& FullDir)
 			OutArray.Empty();
 			FullDir.ParseIntoArray(OutArray, TEXT("\\"));
 		}
-		resault = OutArray.Last();
+		result = OutArray.Last();
 		OutArray.Empty();
-		resault.ParseIntoArray(OutArray, TEXT("."));
-		resault = OutArray[0];
+		result.ParseIntoArray(OutArray, TEXT("."));
+		result = OutArray[0];
 	}
-	return resault;
+	return result;
 }
