@@ -5,7 +5,7 @@
 #include "Data/FLaunchConf.h"
 #include "Tools/EngineLaunchTools.h"
 
-class SEditableBoxWraper;
+class SEditableBoxWrapper;
 class SConfPanel;
 
 /** @return a new Drag and Drop test widget */
@@ -107,9 +107,9 @@ public:
 	void UpdateAll(const FLaunchConf& conf);
 protected:
 
-	//FReply DeleteParamExitableBoxWidget(TSharedPtr<SEditableBoxWraper> pWidget);
+	//FReply DeleteParamExitableBoxWidget(TSharedPtr<SEditableBoxWrapper> pWidget);
 	// Create/Add a Editable Parameter Box.
-	TSharedRef<SEditableBoxWraper> CreateEditableTextBox(const FString& TextContent);
+	TSharedRef<SEditableBoxWrapper> CreateEditableTextBox(const FString& TextContent);
 	void AddParamTextBoxToSlot(const FString& TextContent=TEXT(""));
 public:
 	void HandleEngineSelectorChanged(const FString& NewEngine);

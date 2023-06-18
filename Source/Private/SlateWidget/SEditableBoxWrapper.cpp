@@ -1,13 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-#include "SlateWidget/SEditableBoxWraper.h"
+#include "SlateWidget/SEditableBoxWrapper.h"
 #include "SlateOptMacros.h"
 #include "Tools/EngineLaunchTools.h"
-//
-#define LOCTEXT_NAMESPACE "EditableBoxWraper"
+
+#define LOCTEXT_NAMESPACE "EditableBoxWrapper"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
-void SEditableBoxWraper::Construct(const FArguments& InArgs)
+
+void SEditableBoxWrapper::Construct(const FArguments& InArgs)
 {
 	OnDeleteSelgClicked = InArgs._OnDeleteClicked;
 	ChildSlot
@@ -27,7 +26,7 @@ void SEditableBoxWraper::Construct(const FArguments& InArgs)
 				.Text(InArgs._BtnOpenText)
 				.HAlign(HAlign_Center)
 				.VAlign(VAlign_Center)
-				.OnClicked(this, &SEditableBoxWraper::OnClickEventOpenText)
+				.OnClicked(this, &SEditableBoxWrapper::OnClickEventOpenText)
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -36,9 +35,9 @@ void SEditableBoxWraper::Construct(const FArguments& InArgs)
 				.Text(InArgs._BtnClearText)
 				.HAlign(HAlign_Center)
 				.VAlign(VAlign_Center)
-				.OnClicked(this, &SEditableBoxWraper::OnClickEventClearText)
+				.OnClicked(this, &SEditableBoxWrapper::OnClickEventClearText)
 			]
-			// open uproject file button
+			// Open .uproject File Button
 			+ SHorizontalBox::Slot()
 				.AutoWidth()
 				[
@@ -46,19 +45,19 @@ void SEditableBoxWraper::Construct(const FArguments& InArgs)
 					.Text(InArgs._BtnDeleteText)
 					.HAlign(HAlign_Center)
 					.VAlign(VAlign_Center)
-					.OnClicked(this,&SEditableBoxWraper::OnClickEventDeleteSelf)
+					.OnClicked(this,&SEditableBoxWrapper::OnClickEventDeleteSelf)
 				]
 	];
 	
 }
 
-FReply SEditableBoxWraper::OnClickEventClearText()
+FReply SEditableBoxWrapper::OnClickEventClearText()
 {
 	EditableTextBox->SetText(FText::FromString(TEXT("")));
 	return FReply::Handled();
 }
 
-FReply SEditableBoxWraper::OnClickEventOpenText()
+FReply SEditableBoxWrapper::OnClickEventOpenText()
 {
 	TArray<FString> OpenFiles = EngineLaunchTools::OpenFileDialog();
 	FString AppendText;
@@ -71,21 +70,23 @@ FReply SEditableBoxWraper::OnClickEventOpenText()
 	return FReply::Handled();
 }
 
-FReply SEditableBoxWraper::OnClickEventDeleteSelf()
+FReply SEditableBoxWrapper::OnClickEventDeleteSelf()
 {
 	EditableTextBox->SetText(FText::FromString(TEXT("")));
 	this->SetVisibility(EVisibility::Collapsed);
 	return FReply::Handled();
 }
 
-void SEditableBoxWraper::SetText(const FText& NewText)
+void SEditableBoxWrapper::SetText(const FText& NewText)
 {
 	EditableTextBox->SetText(NewText);
 }
-FText SEditableBoxWraper::GetEditableBoxText()const
+
+FText SEditableBoxWrapper::GetEditableBoxText()const
 {
 	return EditableTextBox->GetText();
 }
+
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 #undef LOCTEXT_NAMESPACE

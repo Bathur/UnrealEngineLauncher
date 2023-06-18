@@ -21,8 +21,8 @@
 #include "IDesktopPlatform.h"
 #include "DesktopPlatformModule.h"
 
-// project files
-#include "SlateWidget/SEditableBoxWraper.h"
+// Project Files
+#include "SlateWidget/SEditableBoxWrapper.h"
 #include "SlateWidget/SCombBoxWarper.h"
 
 #include "Tools/SerializationTools.h"
@@ -661,7 +661,7 @@ TArray<FString> SConfPanel::GetAllLaunchParams()const
 		for (int32 index = 0; index < ScrollBoxChildren->Num(); index++)
 		{
 			SWidget* Widget = &(ScrollBoxChildren->GetChildAt(index).Get());
-			SEditableBoxWraper* ScrollBoxChildTextItem = static_cast<SEditableBoxWraper*>(Widget);
+			SEditableBoxWrapper* ScrollBoxChildTextItem = static_cast<SEditableBoxWrapper*>(Widget);
 			if (ScrollBoxChildTextItem)
 			{
 				FString TextItemString = ScrollBoxChildTextItem->GetEditableBoxText().ToString();
@@ -677,9 +677,9 @@ TArray<FString> SConfPanel::GetAllLaunchParams()const
 }
 
 
-TSharedRef<SEditableBoxWraper> SConfPanel::CreateEditableTextBox(const FString& TextContent)
+TSharedRef<SEditableBoxWrapper> SConfPanel::CreateEditableTextBox(const FString& TextContent)
 {
-	TSharedRef<SEditableBoxWraper> CreatedWidget = SNew(SEditableBoxWraper)
+	TSharedRef<SEditableBoxWrapper> CreatedWidget = SNew(SEditableBoxWrapper)
 		.EditableHintText(LOCTEXT("LaunchParam_0", "Please input Launch paramater."))
 		.EditableText(FText::FromString(TextContent))
 		.BtnOpenText(FText::FromString(TEXT("O")))

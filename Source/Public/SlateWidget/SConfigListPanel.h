@@ -5,7 +5,7 @@
 #include "Data/FLaunchConf.h"
 #include "Tools/EngineLaunchTools.h"
 
-class SEditableBoxWraper;
+class SEditableBoxWrapper;
 class SConfigCard;
 
 DECLARE_DELEGATE_OneParam(FOnConfigCardSelected, SConfigCard*)

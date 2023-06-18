@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "Input/Reply.h"
@@ -7,19 +5,18 @@
 #include "CoreMinimal.h"
 #include "Widgets/SCompoundWidget.h"
 
-class SEditableBoxWraper;
-/**
- * 
- */
-TSharedPtr<SEditableBoxWraper> MakeShareableEditBox(SEditableBoxWraper* EditableBoxWraperObj);
+class SEditableBoxWrapper;
 
-class SEditableBoxWraper;
-DECLARE_DELEGATE_RetVal_OneParam(FReply, FOnDeleteClicked, TSharedPtr<SEditableBoxWraper>)
+TSharedPtr<SEditableBoxWrapper> MakeShareableEditBox(SEditableBoxWrapper* EditableBoxWrapperObj);
 
-class SEditableBoxWraper : public SCompoundWidget
+DECLARE_DELEGATE_RetVal_OneParam(FReply, FOnDeleteClicked, TSharedPtr<SEditableBoxWrapper>)
+
+class SEditableBoxWrapper : public SCompoundWidget
 {
+
 public:
-	SLATE_BEGIN_ARGS(SEditableBoxWraper)
+
+	SLATE_BEGIN_ARGS(SEditableBoxWrapper)
 		:_EditableText()
 		,_EditableHintText()
 		,_BtnOpenText()
@@ -34,20 +31,19 @@ public:
 	SLATE_EVENT(FOnDeleteClicked, OnDeleteClicked)
 	SLATE_END_ARGS()
 
-	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
 	void SetText(const FText& NewText);
 	FText GetEditableBoxText()const;
 	FOnDeleteClicked OnDeleteSelgClicked;
 
-public:
 	FReply OnClickEventClearText();
 	FReply OnClickEventOpenText();
 	FReply OnClickEventDeleteSelf();
 
 private:
+
 	TSharedPtr<SHorizontalBox> HorzontaBox;
 	TSharedPtr<SEditableTextBox> EditableTextBox;
-};
 
+};
