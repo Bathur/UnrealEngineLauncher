@@ -36,7 +36,7 @@ public:
 	FText GetDeveloperName() const {return FText::FromString(DeveloperName);};
 	FText GetUpdateWebsite() const {return FText::FromString(UpdateWebsite);};
 	FText GetDeveloperWebsite() const {return FText::FromString(DeveloperWebsite);};
-	FText GetDeveloperDescrible() const {return FText::FromString(FString::Printf(TEXT("Developed By %s"),*GetDeveloperName().ToString()));};
+	FText GetDeveloperDescrible() const {return FText::FromString(FString::Printf(TEXT("Modified By %s"),*GetDeveloperName().ToString()));};
 	FText GetLatstVersionText() const {return FText::FromString(FString::Printf(TEXT("A New Version v1.%d Is Avaliable"),LatstVersion));};
 	virtual void SetToolUpdateInfo(const FString& ToolName,const FString& DeveloperName,const FString& DeveloperWebsite,const FString& UpdateWebsite);
 	int32 GetCurrentVersion()const { return CurrentVersion; }

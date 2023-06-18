@@ -159,7 +159,7 @@ namespace WindowManager
 				[
 					SAssignNew(VersionUpdaterWidget,SVersionUpdaterWidget)
 					.ToolName(FText::FromString(TOOL_NAME))
-					.DeveloperName(FText::FromString(TEXT("bathurlu")))
+					.DeveloperName(FText::FromString(TEXT("BathurLu")))
 					.DeveloperWebsite(FText::FromString(TEXT("https://bathur.cn")))
 					.UpdateWebsite(FText::FromString(TEXT("https://bathur.cn")))
 					.CurrentVersion(CURRENT_VERSION_ID)
