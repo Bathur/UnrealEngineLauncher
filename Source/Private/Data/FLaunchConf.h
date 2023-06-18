@@ -4,7 +4,6 @@
 #include "Array.h"
 #include "CoreMinimal.h"
 
-
 struct FLaunchConf
 {
 	FString Engine;
