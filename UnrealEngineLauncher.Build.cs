@@ -1,8 +1,4 @@
-
-// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
-
 using UnrealBuildTool;
-using System.IO;
 
 public class UnrealEngineLauncher : ModuleRules
 {
@@ -19,7 +15,8 @@ public class UnrealEngineLauncher : ModuleRules
         PrivateIncludePaths.AddRange(
             new string[]
             {
-                "Runtime/Launch/Private",  // For LaunchEngineLoop.cpp include
+				// For LaunchEngineLoop.cpp Include
+                "Runtime/Launch/Private",  
                 "Programs/UnrealEngineLauncher/Source/Private"
             });
 
@@ -54,7 +51,7 @@ public class UnrealEngineLauncher : ModuleRules
 		PublicDefinitions.AddRange(new string[]
 		{
 			"TOOL_NAME=\"UnrealEngineLauncher\"",
-			"CURRENT_VERSION_ID=24",
+			"CURRENT_VERSION_ID=25",
 			"REMOTE_VERSION_FILE=\"\""
 		});
 	}
