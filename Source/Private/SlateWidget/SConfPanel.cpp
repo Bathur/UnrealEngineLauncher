@@ -1,5 +1,3 @@
-//// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
-//
 #include "SlateWidget/SConfPanel.h"
 
 #include "Widgets/DeclarativeSyntaxSupport.h"
@@ -91,14 +89,6 @@ void SConfPanel::Construct(const FArguments& InArgs)
 											[
 												SNew(SOverlay)
 											]
-											//+SHorizontalBox::Slot()
-											//.AutoWidth()
-											//.HAlign(HAlign_Center)
-											//[
-											//	SNew(SHyperlink)
-											//		.Text(LOCTEXT("Developer", "Developed by lipengzha"))
-											//		.OnNavigate(this, &SConfPanel::HyLinkClickEventOpenDeveloperWebsite)
-											//]
 									]
 								]
 								+SVerticalBox::Slot()
@@ -175,7 +165,7 @@ void SConfPanel::Construct(const FArguments& InArgs)
 											]
 									]
 							]
-					// open project location
+					// Open Project Location
 					+ SGridPanel::Slot(0, 4)
 						.HAlign(HAlign_Left)
 						.Padding(0.0f, 2.0f, 0.0f, 0.0f)
@@ -190,10 +180,9 @@ void SConfPanel::Construct(const FArguments& InArgs)
 								.AutoHeight()
 								.Padding(5.0f)
 								[
-									// show uproject file path
+									// Show .uproject File Path
 									SNew(SHorizontalBox)
 									+ SHorizontalBox::Slot()
-										//.AutoWidth()
 										.FillWidth(1.0f)
 										[
 											SNew(SEditableTextBox)
@@ -202,9 +191,8 @@ void SConfPanel::Construct(const FArguments& InArgs)
 											.OnTextChanged(this, &SConfPanel::OnProjectFileTextBoxChanged)
 
 										]
-									// open uproject file button
+									// Open .uproject File Button
 									+ SHorizontalBox::Slot()
-										//.FillWidth(0.3f)
 										.AutoWidth()
 										[
 											SNew(SButton)
@@ -214,7 +202,6 @@ void SConfPanel::Construct(const FArguments& InArgs)
 											.OnClicked(this, &SConfPanel::BtnClickEventOpenProjectFile)
 										]
 									+ SHorizontalBox::Slot()
-										//.FillWidth(0.3f)
 										.AutoWidth()
 										[
 											SNew(SButton)
@@ -224,7 +211,6 @@ void SConfPanel::Construct(const FArguments& InArgs)
 											.OnClicked(this, &SConfPanel::BtnClickEventOpenProjectFileDir)
 										]
 									+ SHorizontalBox::Slot()
-										//.FillWidth(0.3f)
 										.AutoWidth()
 										[
 											SAssignNew(BtnGenerateSln, SButton)
@@ -235,7 +221,6 @@ void SConfPanel::Construct(const FArguments& InArgs)
 											.OnClicked(this, &SConfPanel::BtnClickEventGenerateProjectSln)
 										]
 									+ SHorizontalBox::Slot()
-										//.FillWidth(0.3f)
 										.AutoWidth()
 										[
 											SAssignNew(BtnOpenProjectSln,SButton)
@@ -248,7 +233,7 @@ void SConfPanel::Construct(const FArguments& InArgs)
 
 						]
 
-					// input launch params
+					// Input Launch Params
 					+ SGridPanel::Slot(0, 5)
 						[
 							SNew(SVerticalBox)
@@ -262,7 +247,7 @@ void SConfPanel::Construct(const FArguments& InArgs)
 								.AutoHeight()
 								.Padding(3.0f)
 								[
-									// init create a input box
+									// Init Create A Input Box
 									SAssignNew(SrbWidgetLaunchParams, SScrollBox)
 									+ SScrollBox::Slot()
 									.Padding(0.0f, 3.0f)
@@ -270,7 +255,7 @@ void SConfPanel::Construct(const FArguments& InArgs)
 										CreateEditableTextBox(TEXT(""))
 									]
 								]
-								// add a new input param box
+								// Add A New Input Param Box
 								+ SVerticalBox::Slot()
 									.AutoHeight()
 									[
@@ -301,7 +286,6 @@ void SConfPanel::Construct(const FArguments& InArgs)
 
 					// SHeader
 					+ SGridPanel::Slot(0, 6)
-						// .Padding(0.0f, 3.0f, 0.0f, 3.0f)
 						.Padding(3.0)
 						[
 							SNew(SHeader)
@@ -345,7 +329,7 @@ void SConfPanel::Construct(const FArguments& InArgs)
 				]
 
 	];
-	// initialize
+	// Initialize
 	{
 		UpdateEngineSelector(EngineLaunchTools::GetAllRegistedEngineMap());
 		UpdateToolSelector(EngineLaunchTools::GetToolList());
@@ -354,10 +338,12 @@ void SConfPanel::Construct(const FArguments& InArgs)
 	}
 
 }
+
 #include "Layout/Visibility.h"
+
 void SConfPanel::HyLinkClickEventOpenDeveloperWebsite()
 {
-	FPlatformProcess::LaunchURL(TEXT("https://imzlp.com"), NULL, NULL);
+	FPlatformProcess::LaunchURL(TEXT("https://bathur.cn"), NULL, NULL);
 }
 
 EVisibility SConfPanel::BtnGenerateSlnVisibility()const
@@ -376,6 +362,7 @@ FReply SConfPanel::BtnClickEventAddLaunchParamButton()
 	AddParamTextBoxToSlot(TEXT(""));
 	return FReply::Handled();
 }
+
 FReply SConfPanel::BtnClickEventClearAllLaunchParamsButton()
 {
 	SrbWidgetLaunchParams->ClearChildren();
@@ -399,6 +386,7 @@ FReply SConfPanel::BtnClickEventLaunchProject()
 
 	return FReply::Handled();
 }
+
 FReply SConfPanel::BtnClickEventOpenProjectFile()
 {
 	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
@@ -504,6 +492,7 @@ FReply SConfPanel::BtnClickEventClearConfig()
 	UpdateAll(DefaultConfig);
 	return FReply::Handled();
 }
+
 FReply SConfPanel::BtnClickEventLoadConfig()
 {
 	FString SelectedLoadConfigPath;
@@ -547,6 +536,7 @@ FReply SConfPanel::BtnClickEventAddToGlobal()
 	OnAddToGlobal.ExecuteIfBound(GetLaunchConf());
 	return FReply::Handled();
 }
+
 FReply SConfPanel::BtnClickEventSaveConfig()
 {
 	FString SelectedSaveConfigPath;
@@ -580,7 +570,7 @@ FReply SConfPanel::BtnClickEventSaveConfig()
 	{
 		SelectedSaveConfigPath = GetOpenedFile();
 	}
-	// serialization config
+	// Serialization Config
 	FFileHelper::SaveStringToFile(SerializationTools::SerializationConf(GetLaunchConf()), *SelectedSaveConfigPath);
 
 	return FReply::Handled();
@@ -596,6 +586,7 @@ FString SConfPanel::GetOpenedFile()const
 {
 	return OpenedConfFile;
 }
+
 void SConfPanel::UpdateToolSelector(const TArray<FString>& ToolsList, const FString& DefaultTool)
 {
 	CmbToolSelector->ClearAllSelectItem();
@@ -609,6 +600,7 @@ void SConfPanel::UpdateAll(const FLaunchConf& conf)
 	UpdateSelectedProject(conf.Project);
 	UpdateLaunchParams(conf.Params);
 }
+
 FLaunchConf SConfPanel::GetLaunchConf()const
 {
 	FLaunchConf Conf;
@@ -624,6 +616,7 @@ FString SConfPanel::GetSelectedTool()const
 {
 	return CmbToolSelector->GetCurretSelectedItem();
 }
+
 FText SConfPanel::GetProjectFileText()const
 {
 	return FText::FromString(OpenProjectFilePath);
@@ -651,7 +644,7 @@ FText SConfPanel::GetLaunchProjectBtnText()const
 
 TArray<FString> SConfPanel::GetAllLaunchParams()const
 {
-	TArray<FString> resault;
+	TArray<FString> result;
 
 	SScrollBox* ScrollboxWidget = &*SrbWidgetLaunchParams;
 	FChildren* ScrollBoxChildren = SlateWidgetTools::GetScrollBoxChildren(ScrollboxWidget);
@@ -667,13 +660,13 @@ TArray<FString> SConfPanel::GetAllLaunchParams()const
 				FString TextItemString = ScrollBoxChildTextItem->GetEditableBoxText().ToString();
 				if (TextItemString.Len() > 0)
 				{
-					resault.Add(TextItemString);
+					result.Add(TextItemString);
 				}
 			}
 		}
 	}
 
-	return resault;
+	return result;
 }
 
 
@@ -704,7 +697,6 @@ void SConfPanel::HandleEngineSelectorChanged(const FString& NewEngine)
 	UpdateOpenVSButton(NewEngine);
 }
 
-
 void SConfPanel::UpdateEngineSelector(const TMap<FString, FString>& EngineMap, FString DefaultEngine)
 {
 	CmbEngineSelector->UpdateSelector(EngineLaunchTools::GetAllRegistedEngineList(EngineMap),DefaultEngine);
@@ -721,7 +713,6 @@ void SConfPanel::UpdateOpenVSButton(const FString& EnginePath)
 			BtnOpenVS->SetVisibility(EVisibility::Collapsed);
 	}
 }
-
 
 void SConfPanel::UpdateLaunchParams(const TArray<FString>& pParamsArray)
 {
@@ -741,7 +732,6 @@ void SConfPanel::UpdateSelectedProject(const FString& ProjectPath)
 {
 	OnProjectFileTextBoxChanged(FText::AsCultureInvariant(ProjectPath));
 }
-
 
 void SConfPanel::OnProjectFileTextBoxChanged(const FText& NewText)
 {
@@ -773,15 +763,6 @@ void SConfPanel::UpdateOpenProjectSlnButton(const FString& SelectedProjectPath)
 	}
 }
 
-// TSharedRef<SWidget> MakeWidgetUELauncher()
-// {
-// 	extern TOptional<FSlateRenderTransform> GetTestRenderTransform();
-// 	extern FVector2D GetTestRenderTransformPivot();
-// 	return
-// 		SNew(SConfPanel)
-// 		.RenderTransform_Static(&GetTestRenderTransform)
-// 		.RenderTransformPivot_Static(&GetTestRenderTransformPivot);
-// }
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 #undef LOCTEXT_NAMESPACE

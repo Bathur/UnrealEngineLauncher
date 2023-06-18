@@ -10,6 +10,7 @@ class SVersionUpdaterWidget : public SCompoundWidget
 {
 
 public:
+
 	SLATE_BEGIN_ARGS(SVersionUpdaterWidget):
 	_CurrentVersion(),
 	_ToolName(),
@@ -25,28 +26,26 @@ public:
 	SLATE_END_ARGS()
 
 public:
-	/**
-	* Construct the widget
-	*
-	* @param	InArgs			A declaration from which to construct the widget
-	*/
+
 	void Construct(const FArguments& InArgs);
 	void HyLinkClickEventOpenUpdateWebsite();
 	void HyLinkClickEventOpenDeveloperWebsite();
 
-	FText GetCurrentVersionText() const {return FText::FromString(FString::Printf(TEXT("Current Version v%d."),GetCurrentVersion()));};
+	FText GetCurrentVersionText() const {return FText::FromString(FString::Printf(TEXT("Current Version v1.%d"),GetCurrentVersion()));};
 	FText GetToolName() const {return FText::FromString(ToolName);};
 	FText GetDeveloperName() const {return FText::FromString(DeveloperName);};
 	FText GetUpdateWebsite() const {return FText::FromString(UpdateWebsite);};
 	FText GetDeveloperWebsite() const {return FText::FromString(DeveloperWebsite);};
-	FText GetDeveloperDescrible() const {return FText::FromString(FString::Printf(TEXT("Developed by %s"),*GetDeveloperName().ToString()));};
-	FText GetLatstVersionText() const {return FText::FromString(FString::Printf(TEXT("A new version v%d is avaliable"),LatstVersion));};
+	FText GetDeveloperDescrible() const {return FText::FromString(FString::Printf(TEXT("Developed By %s"),*GetDeveloperName().ToString()));};
+	FText GetLatstVersionText() const {return FText::FromString(FString::Printf(TEXT("A New Version v1.%d Is Avaliable"),LatstVersion));};
 	virtual void SetToolUpdateInfo(const FString& ToolName,const FString& DeveloperName,const FString& DeveloperWebsite,const FString& UpdateWebsite);
 	int32 GetCurrentVersion()const { return CurrentVersion; }
 
 	void OnRequestComplete(FHttpRequestPtr RequestPtr, FHttpResponsePtr ResponsePtr, bool bConnectedSuccessfully);
 	void RequestVersion(const FString& URL);
+
 private:
+
 	int32 CurrentVersion = 0;
 	FString ToolName;
 	FString UpdateWebsite;
@@ -55,5 +54,5 @@ private:
 	TSharedPtr<SHorizontalBox> UpdateInfoWidget;
 	int32 LatstVersion = 0;
 	FHttpRequestPtr HttpHeadRequest;
-};
 
+};

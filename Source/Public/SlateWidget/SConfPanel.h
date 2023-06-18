@@ -8,14 +8,12 @@
 class SEditableBoxWrapper;
 class SConfPanel;
 
-/** @return a new Drag and Drop test widget */
-// TSharedRef<SWidget> MakeWidgetUELauncher();
-
 DECLARE_DELEGATE_OneParam(FOnOpendFile, const FString&)
 DECLARE_DELEGATE_OneParam(FOnAddToGlobal, FLaunchConf)
 
 class SConfPanel :public SCompoundWidget
 {
+
 public:
 
 	SLATE_BEGIN_ARGS(SConfPanel)
@@ -27,26 +25,23 @@ public:
 
 public:
 
-	/**
-	 * Constructs the widget gallery.
-	 *
-	 * @param InArgs - Construction arguments.
-	 */
 	void Construct(const FArguments& InArgs);
 
 	// Slate Event
 	FOnOpendFile OnOpenedFileEvent;
 
 public:
+
 	// Widget Show Text
 	FText GetProjectFileText()const;
 	FText GetLaunchEngineBtnText()const;
 	FText GetLaunchProjectBtnText()const;
 
 public:
-	// Get conf
+
+	// Get Conf
 	FString GetSelectedEnginePath()const;
-	// get Selected .uproject file path
+	// Get Selected .uproject File Path
 	FString GetSelectedProjectPath()const;
 	// Get Selected Tool
 	FString GetSelectedTool()const;
@@ -55,10 +50,9 @@ public:
 	// Get All Conf
 	FLaunchConf GetLaunchConf()const;
 
-
-
 public:
-	// Add/Clear Launch parameter button clicked event
+
+	// Add/Clear Launch Parameter Button Clicked Event
 	FReply BtnClickEventAddLaunchParamButton();
 	FReply BtnClickEventClearAllLaunchParamsButton();
 	// Launch Project
@@ -67,79 +61,88 @@ public:
 	FReply BtnClickEventLaunchEngine();
 	FReply BtnClickEventOpenVS();
 	FReply BtnClickEventOpenEngineDir();
-	// Open uproject file clickd event
+	// Open .uproject File Clicked Event
 	FReply BtnClickEventOpenProjectFile();
-	// open project directory
+	// Open Project Directory
 	FReply BtnClickEventOpenProjectFileDir();
-	// open project sln
+	// Open Project .sln File
 	FReply BtnClickEventOpenProjectSln();
 	FReply BtnClickEventGenerateProjectSln();
-	// read/write config
+	// Read/Write Config
 	FReply BtnClickEventLoadConfig();
 	FReply BtnClickEventSaveConfig();
 	FReply BtnClickEventAddToGlobal();
 	FReply BtnClickEventClearConfig();
-	// open Developer website
+	// Open Developer Website
 	void HyLinkClickEventOpenDeveloperWebsite();
 
 	EVisibility BtnGenerateSlnVisibility()const;
-	//
 	void SetOpenedFile(const FString& Path=TEXT(""));
 	FString GetOpenedFile()const;
+
 public:
-	// state changed event
+
+	// State Changed Event
 	void OnProjectFileTextBoxChanged(const FText& NewText);
+
 public:
+
 	// Update Engine Selector
 	void UpdateEngineSelector(const TMap<FString, FString>& pEngineMap, FString DefaultEngine = TEXT(""));
 	// Update Tools Selector
 	void UpdateToolSelector(const TArray<FString>& ToolsList,const FString& DefaultTool=TEXT(""));
-	// Update is show OpenVS Button
+	// Update Is Show OpenVS Button
 	void UpdateOpenVSButton(const FString& EnginePath);
 	
 	void UpdateSelectedProject(const FString& ProjectPath=TEXT(""));
-	// Update is show OpenVS Button
+	// Update Is Show OpenVS Button
 	void UpdateOpenProjectSlnButton(const FString& SelectedProjectPath);
 
 	void UpdateLaunchParams(const TArray<FString>& pParamsArray = TArray<FString>{});
 
-	// Update ALL
+	// Update All
 	void UpdateAll(const FLaunchConf& conf);
+
 protected:
 
-	//FReply DeleteParamExitableBoxWidget(TSharedPtr<SEditableBoxWrapper> pWidget);
-	// Create/Add a Editable Parameter Box.
+	// Create/Add A Editable Parameter Box.
 	TSharedRef<SEditableBoxWrapper> CreateEditableTextBox(const FString& TextContent);
 	void AddParamTextBoxToSlot(const FString& TextContent=TEXT(""));
+
 public:
+
 	void HandleEngineSelectorChanged(const FString& NewEngine);
 
 	FOnAddToGlobal OnAddToGlobal;
+
 private:
-	// Main panel scrollbox
+
+	// Main Panel Scrollbox
 	TSharedPtr<SScrollBox> SrbWidgetMain;
 	// Selector
 	TSharedPtr<class SCombBoxWarper> CmbEngineSelector;
 	TSharedPtr<class SCombBoxWarper> CmbToolSelector;
 	// Add Launch Parameter
 	TSharedPtr<SScrollBox> SrbWidgetLaunchParams;
-	// button
+	// Buttons
 	TSharedPtr<SButton> BtnLaunchEngine;
 	TSharedPtr<SButton> BtnOpenVS;
 	TSharedPtr<SButton> BtnGenerateSln;
 	TSharedPtr<SButton> BtnOpenProjectSln;
 	TSharedPtr<SButton> BtnLaunchProject;
 
-	// Button Text
+	// Buttons Text
 	mutable FString LaunchEngineBtnText{ TEXT("Launch") };
 	mutable FString LaunchProjectBtnText{ TEXT("Launch Configuration") };
 
 	// opened .uproject file
 	FString OpenProjectFilePath;
+
 private:
-	// general data
+
+	// General Data
 	TMap<FString, FString> RegisterEngineMap;
 
 	FString OpenedConfFile;
-};
 
+};

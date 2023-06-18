@@ -1,5 +1,3 @@
-//// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
-//
 #include "SlateWidget/SConfigListPanel.h"
 #include "Widgets/DeclarativeSyntaxSupport.h"
 #include "Widgets/SCompoundWidget.h"
@@ -17,14 +15,14 @@
 #include "IDesktopPlatform.h"
 #include "DesktopPlatformModule.h"
 #include "Runtime/Launch/Resources/Version.h"
-// project files
+// Project Files
 #include "Widgets/SCanvas.h"
 #include "Tools/SerializationTools.h"
 #include "Tools/EngineLaunchTools.h"
+
 #define LOCTEXT_NAMESPACE "WidgetConfigListPanel"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
-
 
 void SConfigCard::Construct(const FArguments& InArgs,const FLaunchConf& Conf)
 {
@@ -50,10 +48,8 @@ void SConfigCard::Construct(const FArguments& InArgs,const FLaunchConf& Conf)
 		+SOverlay::Slot()
 		[
 			SAssignNew(Button,SButton)
-			// .ContentScale(FVector2D{2,1})
 			.HAlign(HAlign_Fill)
 			.VAlign(VAlign_Fill)
-			// .ButtonColorAndOpacity(FLinearColor{1.0,1.0,1.0,0})
 			.OnHovered(this,&SConfigCard::OnHover)
 			.OnUnhovered(this,&SConfigCard::OnUnhover)
 			.OnClicked(this,&SConfigCard::OnClicked)
@@ -230,7 +226,7 @@ void SConfigListPanel::OnConfigSelected(SConfigCard* Card)
 
 void SConfigListPanel::HyLinkClickEventOpenVersionWebsite()
 {
-	FPlatformProcess::LaunchURL(TEXT("https://imzlp.com/posts/3635/"), NULL, NULL);
+	FPlatformProcess::LaunchURL(TEXT("https://bathur.cn"), NULL, NULL);
 }
 
 FReply SConfigListPanel::BtnClickEventLoadGlobal()
@@ -264,7 +260,6 @@ FReply SConfigListPanel::BtnClickEventLoadGlobal()
 	return FReply::Handled();
 }
 
-
 FReply SConfigListPanel::BtnClickEventRefresh()
 {
 	Refresh();
@@ -281,7 +276,6 @@ FReply SConfigListPanel::BtnClickEventRemove()
 			CardIns->RemoveFromParent();
 			ConfigListWidget->RemoveSlot(ConfigCardsWidget[index].ToSharedRef());
 			ConfigCardsWidget.RemoveAt(index);
-			// CardIns->SetVisibility(EVisibility::Collapsed);
 		}
 		else
 		{
@@ -308,7 +302,6 @@ void SConfigListPanel::Refresh()
 	CleanAllConfig();
 	ImportGlobalConfig(GetGlobalConfigPath());
 }
-
 
 void SConfigListPanel::ImportGlobalConfig(const FString& ConfigFile)
 {

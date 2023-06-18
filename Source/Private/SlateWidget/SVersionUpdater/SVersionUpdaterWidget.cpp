@@ -1,5 +1,5 @@
 #include "SVersionUpdaterWidget.h"
-// engine header
+// Engine Header
 #include "Widgets/Input/SHyperlink.h"
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Images/SImage.h"
@@ -14,7 +14,6 @@
 #include "Interfaces/IHttpResponse.h"
 
 #define LOCTEXT_NAMESPACE "VersionUpdaterWidget"
-
 
 void SVersionUpdaterWidget::Construct(const FArguments& InArgs)
 {
@@ -39,7 +38,6 @@ void SVersionUpdaterWidget::Construct(const FArguments& InArgs)
 		SNew(SBorder)
 		.Padding(2)
 		.ColorAndOpacity(FLinearColor{ 1.0,1.0,1.0,1.0 })
-		//.BorderImage(FVersionUpdaterStyle::GetBrush("Updater.GroupBorder"))
 		[
 			SNew(SHorizontalBox)
 			+ SHorizontalBox::Slot()
@@ -48,18 +46,6 @@ void SVersionUpdaterWidget::Construct(const FArguments& InArgs)
 			.Padding(4.0f, 0.0f, 4.0f, 0.0f)
 			[
 				SNew(SHorizontalBox)
-				+ SHorizontalBox::Slot()
-				.AutoWidth()
-				.VAlign(VAlign_Center)
-				[
-					SNew(SBox)
-					.WidthOverride(40)
-					.HeightOverride(40)
-					[
-						SNew(SImage)
-						.Image(FVersionUpdaterStyle::GetBrush("Updater.QuickLaunch"))
-					]
-				]
 				+ SHorizontalBox::Slot()
 				.AutoWidth()
 				.Padding(10,0,10,0)
@@ -154,8 +140,7 @@ void SVersionUpdaterWidget::HyLinkClickEventOpenDeveloperWebsite()
 	FPlatformProcess::LaunchURL(*DeveloperWebsite, NULL, NULL);
 }
 
-void SVersionUpdaterWidget::SetToolUpdateInfo(const FString& InToolName, const FString& InDeveloperName,
-	const FString& InDeveloperWebsite, const FString& InUpdateWebsite)
+void SVersionUpdaterWidget::SetToolUpdateInfo(const FString& InToolName, const FString& InDeveloperName, const FString& InDeveloperWebsite, const FString& InUpdateWebsite)
 {
 	ToolName = InToolName;
 	DeveloperName = InDeveloperName;
@@ -168,7 +153,6 @@ DEFINE_LOG_CATEGORY_STATIC(LogVersionUpdater,All,All);
 void SVersionUpdaterWidget::OnRequestComplete(FHttpRequestPtr RequestPtr, FHttpResponsePtr ResponsePtr, bool bConnectedSuccessfully)
 {
 	FString Result = ResponsePtr->GetContentAsString();;
-	// UE_LOG(LogVersionUpdater, Log, TEXT("%s"),*Result);
 	TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(Result);
 	TSharedPtr<FJsonObject> JsonObject;
 	if (FJsonSerializer::Deserialize(JsonReader, JsonObject))

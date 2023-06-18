@@ -1,11 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "SlateWidget/SCombBoxWarper.h"
 #include "SlateOptMacros.h"
-//
+
 #define LOCTEXT_NAMESPACE "CombBoxWraper"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
+
 void SCombBoxWarper::Construct(const FArguments& InArgs)
 {
 	OnSelectorItemChanged = InArgs._OnSelectorItemChanged;
@@ -64,8 +63,8 @@ void SCombBoxWarper::UpdateSelector(const TArray<FString>& pSelectorList,const F
 		SelectorWidget->SetSelectedItem(CurrentSelectedItem);
 		
 	}
-
 }
+
 FString SCombBoxWarper::GetCurretSelectedItem()const
 {
 	return *CurrentSelectedItem;
@@ -75,6 +74,7 @@ void SCombBoxWarper::ClearAllSelectItem()
 {
 	SelectorTextList.Empty();
 }
+
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 #undef LOCTEXT_NAMESPACE

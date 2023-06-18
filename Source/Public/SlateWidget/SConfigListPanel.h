@@ -13,6 +13,7 @@ DECLARE_DELEGATE_OneParam(FOnConfigFileSelected, FLaunchConf)
 
 class SConfigCard :public SCompoundWidget
 {
+
 public:
 
 	SLATE_BEGIN_ARGS(SConfigCard)
@@ -22,11 +23,6 @@ public:
 
 public:
 
-	/**
-	 * Constructs the widget gallery.
-	 *
-	 * @param InArgs - Construction arguments.
-	 */
 	void Construct(const FArguments& InArgs,const FLaunchConf& Conf);
 
 	void OnHover();
@@ -40,18 +36,19 @@ public:
 	bool IsRemoved()const { return bIsRemoved; }
 	
 	FLaunchConf Config;
+
 private:
+
 	bool bSelected = false;
 	bool bIsRemoved = false;
 	TSharedPtr<SButton> Button;
 	TSharedPtr<STextBlock> TextWidget;
-};
 
-/** @return a new Drag and Drop test widget */
-// TSharedRef<SWidget> MakeWidgetUELauncher();
+};
 
 class SConfigListPanel :public SCompoundWidget
 {
+
 public:
 
 	SLATE_BEGIN_ARGS(SConfigListPanel)
@@ -61,11 +58,6 @@ public:
 
 public:
 
-	/**
-	 * Constructs the widget gallery.
-	 *
-	 * @param InArgs - Construction arguments.
-	 */
 	void Construct(const FArguments& InArgs);
 
 	void AddConfig(const FLaunchConf& Conf);
@@ -81,9 +73,10 @@ public:
 	void SaveGlobalConfig();
 	
 	FOnConfigFileSelected OnConfigFileSelected;
+
 private:
 	
 	TSharedPtr<SVerticalBox> ConfigListWidget;
 	TArray<TSharedPtr<SWidget>> ConfigCardsWidget;
-};
 
+};

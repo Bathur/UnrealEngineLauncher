@@ -7,21 +7,23 @@
 
 class FVersionUpdaterStyle
 {
+
 public:
 
 	static void Initialize();
 
 	static void Shutdown();
 
-	/** reloads textures used by slate renderer */
+	/** Reloads Textures Used By Slate Renderer */
 	static void ReloadTextures();
 
-	/** @return The Slate style set for the Shooter game */
+	/** Return The Slate Style Set */
 	static const ISlateStyle& Get();
 
 	static FName GetStyleSetName();
 
 	static const FSlateBrush* GetBrush( FName PropertyName, const ANSICHAR* Specifier = NULL );
+
 private:
 
 	static TSharedRef< class FSlateStyleSet > Create();
@@ -29,4 +31,5 @@ private:
 private:
 
 	static TSharedPtr< class FSlateStyleSet > StyleInstance;
+
 };
