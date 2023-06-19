@@ -419,7 +419,7 @@ FReply SConfPanel::BtnClickEventOpenProjectFileDir()
 {
 	FString FinalCommdParas = TEXT("/e,/root,");
 
-	FString IsValidDir=EngineLaunchTools::GetProjectDir(GetSelectedProjectPath());
+	FString IsValidDir = EngineLaunchTools::GetProjectDir(GetSelectedProjectPath());
 	FinalCommdParas.Append(IsValidDir);
 
 	FPlatformProcess::CreateProc(TEXT("explorer "), *FinalCommdParas, true, false, false, NULL, NULL, NULL, NULL, NULL);

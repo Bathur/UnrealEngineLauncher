@@ -305,7 +305,7 @@ FString EngineLaunchTools::GetProjectDir(const FString& Project)
 	}
 	for (const auto& item : OutArray)
 	{
-		if (FPaths::DirectoryExists(ProjectPath + item))
+		if (FPaths::DirectoryExists(ProjectPath + item + "\\"))
 		{
 			ProjectPath.Append(item);
 			ProjectPath.Append(TEXT("\\"));
