@@ -231,7 +231,6 @@ void SConfigListPanel::HyLinkClickEventOpenVersionWebsite()
 
 FReply SConfigListPanel::BtnClickEventLoadGlobal()
 {
-	CleanAllConfig();
 	FString SelectedLoadConfigPath;
 	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
 
@@ -253,6 +252,7 @@ FReply SConfigListPanel::BtnClickEventLoadGlobal()
 		if (OpenFilenames.Num() > 0)
 		{
 			SelectedLoadConfigPath = FPaths::ConvertRelativePathToFull(OpenFilenames[0]);
+			CleanAllConfig();
 			ImportGlobalConfig(SelectedLoadConfigPath);
 		}
 	}
