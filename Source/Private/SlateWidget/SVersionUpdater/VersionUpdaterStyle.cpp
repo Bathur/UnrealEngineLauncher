@@ -47,7 +47,7 @@ TSharedRef< FSlateStyleSet > FVersionUpdaterStyle::Create()
 	Style->SetCoreContentRoot(FPaths::EngineContentDir() / TEXT("Slate"));
 
 	Style->Set("Updater.GroupBorder", new BOX_BRUSH("Common/GroupBorder", FMargin(4.0f/16.0f)));
-	Style->Set("Updater.QuickLaunch", new IMAGE_BRUSH("Launcher/Launcher_Launch", Updater_Icon40x40));
+	// Style->Set("Updater.QuickLaunch", new IMAGE_BRUSH("Launcher/Launcher_Launch", Updater_Icon40x40));
 	Style->Set("Updater.Star", new IMAGE_BRUSH("Sequencer/Star", Updater_Icon12x12));
 	Style->Set("Updater.SpawnableIconOverlay", new IMAGE_BRUSH(TEXT("Sequencer/SpawnableIconOverlay"), FVector2D(13, 13)));
 
