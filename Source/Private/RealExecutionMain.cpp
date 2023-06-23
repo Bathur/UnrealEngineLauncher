@@ -34,7 +34,7 @@ namespace CommandHandler{
 
 	bool CmdKeyHasMatched(const TArray<FString>& pTokens,const TArray<FString>& pKeys);
 	static TSharedPtr<SWindow> MainWindow;
-	static bool HasWindow=false;
+	static bool HasWindow = false;
 };
 
 namespace WindowManager
@@ -54,17 +54,17 @@ int RealExecutionMain(const TCHAR* pCmdLine)
 	FCommandLine::Set(pCmdLine);
 	// Start Up The Main Loop
 	GEngineLoop.PreInit(pCmdLine);
-	// Make Dure Sll UObject Classes Are Registered And Default Properties Have Been Initialized
+	// Make Sure All UObject Classes Are Registered And Default Properties Have Been Initialized
 	ProcessNewlyLoadedUObjects();
 	// Tell The Module Manager It May Now Process Newly-loaded UObjects When New C++ Modules Are Loaded
 	FModuleManager::Get().StartProcessingNewlyLoadedObjects();
 	// Crank Up A Normal Slate Application Using The Platform's Standalone Renderer
 	FSlateApplication::InitializeAsStandaloneApplication(GetStandardStandaloneRenderer());
+	FSlateApplication::InitHighDPI(true);
 	// Set The Application Name
 	FGlobalTabmanager::Get()->SetApplicationTitle(LOCTEXT("AppTitle", "Unreal Engine Launcher"));
 	FModuleManager::LoadModuleChecked<ISlateReflectorModule>("SlateReflector").RegisterTabSpawner(FWorkspaceItem::NewGroup(LOCTEXT("DeveloperMenu", "Developer")));
-
-
+	
 	TMap<FString, void(*)(const FString&)> ParamsHandlerMaps;
 	TArray<FString> AllParamsHandlerKey;
 	ParamsHandlerMaps.Add(TEXT("e"), &CommandHandler::CreateConfWindowByLaunchParams);
@@ -101,17 +101,24 @@ int RealExecutionMain(const TCHAR* pCmdLine)
 		// Main Loop
 		while (!IsEngineExitRequested())
 		{
+			BeginExitIfRequested();
+			
 			FTaskGraphInterface::Get().ProcessThreadUntilIdle(ENamedThreads::GameThread);
 			FStats::AdvanceFrame(false);
 			FTSTicker::GetCoreTicker().Tick(FApp::GetDeltaTime());
 			FSlateApplication::Get().PumpMessages();
 			FSlateApplication::Get().Tick();
 			FPlatformProcess::Sleep(0.03);
+
+			GFrameCounter++;
 		}
 	}
 
-	FModuleManager::Get().UnloadModulesAtShutdown();
+	FCoreDelegates::OnExit.Broadcast();
 	FSlateApplication::Shutdown();
+
+	FEngineLoop::AppPreExit();
+	FModuleManager::Get().UnloadModulesAtShutdown();
 
 	return 0;
 }
@@ -121,9 +128,9 @@ int RealExecutionMain(const TCHAR* pCmdLine)
 
 namespace WindowManager
 {
-	static TSharedPtr < SConfPanel > LauncherPanel;
-	static TSharedPtr < SConfigListPanel > LauncherConfListPanel;
-	static TSharedPtr < SVersionUpdaterWidget > VersionUpdaterWidget;
+	static TSharedPtr<SConfPanel> LauncherPanel;
+	static TSharedPtr<SConfigListPanel> LauncherConfListPanel;
+	static TSharedPtr<SVersionUpdaterWidget> VersionUpdaterWidget;
 
 	void OnConfigSelected(FLaunchConf Config)
 	{

@@ -9,5 +9,11 @@ int WinMain(
 	_In_ int nShowCmd
 )
 {
-	return RealExecutionMain(GetCommandLineW());
+	int32 ErrorLevel = 0;
+	ErrorLevel = RealExecutionMain(GetCommandLineW());
+
+	FPlatformMisc::RequestExit(true);
+	FEngineLoop::AppExit();
+	
+	return ErrorLevel;
 }
