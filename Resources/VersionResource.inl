@@ -1,4 +1,4 @@
-// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
+// Copyright Epic Games, Inc. All Rights Reserved.
 
 #ifndef APSTUDIO_INVOKED
 
@@ -6,8 +6,6 @@
 #include "../../../Runtime/Launch/Resources/Windows/resource.h"
 #include "../../../Runtime/Launch/Resources/Version.h"
 
-#define IDICON_UnrealEngineLauncher 2000
-#define IDICON_UnrealEngineConfig 2001
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -48,32 +46,6 @@ END
 
 #endif
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// Application Manifest
-//
-//
-//#if _DEBUG
-//
-//// Debug manifest
-//#if _WIN64
-//1						RT_MANIFEST				"../../../Runtime/Launch/Resources/Windows/Debug-PCLaunch-Win64.manifest"
-//#else
-//1						RT_MANIFEST				"../../../Runtime/Launch/Resources/Windows/Debug-PCLaunch-Win32.manifest"
-//#endif
-//
-//#else
-//
-//// Release manifest
-//#if _WIN64
-//1						RT_MANIFEST				"../../../Runtime/Launch/Resources/Windows/PCLaunch-Win64.manifest"
-//#else
-//1						RT_MANIFEST				"../../../Runtime/Launch/Resources/Windows/PCLaunch-Win32.manifest"
-//#endif
-//
-//#endif
-
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDICON_UnrealEngineLauncher			ICON                    "Icon.ico"
-IDICON_UnrealEngineConfig		ICON                    "Icon_config.ico"
+IDICON_UEGame			ICON                    "Icon.ico"

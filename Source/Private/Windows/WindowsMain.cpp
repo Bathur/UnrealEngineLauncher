@@ -9,6 +9,8 @@ int WinMain(
 	_In_ int nShowCmd
 )
 {
+	hInstance = hInInstance;
+	
 	int32 ErrorLevel = 0;
 	ErrorLevel = RealExecutionMain(GetCommandLineW());
 
